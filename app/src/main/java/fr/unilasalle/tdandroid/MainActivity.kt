@@ -1,6 +1,7 @@
 package fr.unilasalle.tdandroid
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -92,8 +93,12 @@ class MainActivity : AppCompatActivity() {
 
 
         runBlocking {
-                val deferred = async(Dispatchers.IO) {
+            val deferred = async(Dispatchers.IO) {
                 val products = RetrofitInstance.productService.getProducts()
+                products?.let{listProduct ->
+                    val categories: List<String> = listProduct.map{it.category}.distinct()
+                    Log.d("Categories", "Catégorie : $category")
+                }
                 val adapter = ProductAdapter(products)
                 recyclerView.adapter = adapter
             }
