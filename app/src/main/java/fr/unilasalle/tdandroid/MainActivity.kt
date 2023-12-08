@@ -1,13 +1,13 @@
 package fr.unilasalle.tdandroid
 
-//import AppDatabase
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-//import androidx.room.Room
-import layout.ProductAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+        /*
         val productList = listOf(
             ProductEntity(
                 id = 1,
@@ -43,8 +44,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
                 category = "men's clothing",
                 image = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-                rating = 3.9,
-                ratingCount = 120
+                rating = RatingEntity(rate = 3.9, count = 120)
             ),
             ProductEntity(
                 id = 2,
@@ -53,8 +53,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
                 category = "men's clothing",
                 image = "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-                rating = 4.1,
-                ratingCount = 259
+                rating = RatingEntity(rate = 4.1, count = 259)
             ),
             ProductEntity(
                 id = 3,
@@ -63,14 +62,44 @@ class MainActivity : AppCompatActivity() {
                 description = "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
                 category = "men's clothing",
                 image = "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-                rating = 4.7,
-                ratingCount = 500
+                rating = RatingEntity(rate = 4.7, count = 500)
             )
         )
 
-        val adapter = ProductAdapter(productList)
-        recyclerView.adapter = adapter
 
+
+        runBlocking {
+            val deferred = async(Dispatchers.IO) {
+                productDao.insertProducts(productList)
+            }
+            deferred.await()
+        }
+
+        */
+
+        /*
+        runBlocking {
+            val deferred = async(Dispatchers.IO) {
+                val newProductList = productDao.getProducts()
+                val adapter = ProductAdapter(newProductList)
+                recyclerView.adapter = adapter
+
+            }
+
+            deferred.await()
+        }
+         */
+
+
+        runBlocking {
+                val deferred = async(Dispatchers.IO) {
+                val products = RetrofitInstance.productService.getProducts()
+                val adapter = ProductAdapter(products)
+                recyclerView.adapter = adapter
+            }
+            deferred.await()
+        }
 
     }
+
 }

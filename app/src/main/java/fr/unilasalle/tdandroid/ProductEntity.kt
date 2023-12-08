@@ -1,5 +1,6 @@
 package fr.unilasalle.tdandroid
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,6 +12,12 @@ data class ProductEntity(
     val description: String,
     val category: String,
     val image: String,
-    val rating: Double,
-    val ratingCount: Int
+   @Embedded
+   val rating: RatingEntity
+)
+
+@Entity(tableName="rates")
+data class RatingEntity(
+ val rate: Double,
+ val count: Int
 )

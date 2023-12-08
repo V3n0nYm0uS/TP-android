@@ -1,4 +1,4 @@
-package layout
+package fr.unilasalle.tdandroid
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.unilasalle.tdandroid.ProductEntity
 import fr.unilasalle.tdandroid.R
 
-class ProductAdapter(private val productList: List<ProductEntity>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
+class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -40,7 +40,7 @@ class ProductAdapter(private val productList: List<ProductEntity>) : RecyclerVie
         // TODO --Image for --val viewImage: TextView = itemView.findViewById(R.id.image)
         // TODO -- recycler for --val viewRating:
 
-        fun bind(product: ProductEntity){
+        fun bind(product: Product){
             //
         }
     }
