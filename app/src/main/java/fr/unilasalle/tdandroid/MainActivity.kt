@@ -5,29 +5,29 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 //import androidx.room.Room
 import layout.ProductAdapter
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var db: AppDatabase
 
-    //private lateinit var db: AppDatabase
-
-    /*private fun initDb() {
+    private fun initDb() {
         db = Room.databaseBuilder(
             this,
             AppDatabase::class.java,
             "app"
         ).build()
-    }*/
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mainview)
 
-        //this.initDb()
+        this.initDb()
 
-        //val productDao = db.productDao()
+        val productDao = db.productDao()
 
 
         val recyclerView: RecyclerView = findViewById(R.id.my_products)

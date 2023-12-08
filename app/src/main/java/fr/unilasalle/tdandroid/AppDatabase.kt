@@ -1,4 +1,6 @@
-/*import androidx.room.Database
+package fr.unilasalle.tdandroid
+
+import androidx.room.Database
 import androidx.room.RoomDatabase
 import fr.unilasalle.tdandroid.ProductDao
 import fr.unilasalle.tdandroid.ProductEntity
@@ -8,4 +10,3 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
 
 }
-*/
