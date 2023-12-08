@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import fr.unilasalle.tdandroid.Product
+import fr.unilasalle.tdandroid.ProductEntity
 import fr.unilasalle.tdandroid.R
 
-class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
+class ProductAdapter(private val productList: List<ProductEntity>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -31,7 +31,7 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
         return productList.size
     }
 
-    inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val viewId: TextView = itemView.findViewById(R.id.id)
         val viewTitle: TextView = itemView.findViewById(R.id.title)
         val viewPrice: TextView = itemView.findViewById(R.id.price)
@@ -40,7 +40,7 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
         // TODO --Image for --val viewImage: TextView = itemView.findViewById(R.id.image)
         // TODO -- recycler for --val viewRating:
 
-        fun bind(product: Product){
+        fun bind(product: ProductEntity){
             //
         }
     }
