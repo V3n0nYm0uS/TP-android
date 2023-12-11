@@ -23,10 +23,10 @@
 
     <TextView
         android:id="@+id/Cart_text"
-        android:layout_width="129dp"
-        android:layout_height="36dp"
+        android:layout_width="127dp"
+        android:layout_height="72dp"
         android:layout_marginStart="131dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="153dp"
         android:layout_marginBottom="429dp"
         android:text="My cart"
