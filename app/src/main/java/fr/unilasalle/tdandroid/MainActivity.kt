@@ -3,12 +3,9 @@ package fr.unilasalle.tdandroid
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-<<<<<<< HEAD
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-=======
->>>>>>> d1bc2d28a6bd696e9c6a0a675579b8e35a6cb3ac
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity

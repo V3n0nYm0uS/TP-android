@@ -18,12 +18,12 @@ class Panier : AppCompatActivity() {
             val cartItems = ShoppingCart.getCartItems()
 
 
-            val cartAdapter = CartAdapter(cartItems)
-            cartRecyclerView.adapter = cartAdapter
-            cartRecyclerView.layoutManager = LinearLayoutManager(this)
+            //val cartAdapter = CartAdapter(cartItems)
+            //cartRecyclerView.adapter = cartAdapter
+            //cartRecyclerView.layoutManager = LinearLayoutManager(this)
 
 
-            displayCartContents()
+            //displayCartContents()
         }
 
     }
