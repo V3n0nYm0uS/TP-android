@@ -12,6 +12,14 @@ import fr.unilasalle.tdandroid.R
 
 class ItemAdapter(private val productList: List<Product>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
 
+
+    private var selectedCategory: String = "all" // Default category is "all"
+
+    fun filterByCategory(category: String) {
+        selectedCategory = category
+        notifyDataSetChanged() // Refresh the RecyclerView after changing the filter
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_product, parent, false)
@@ -20,14 +28,26 @@ class ItemAdapter(private val productList: List<Product>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int){
         val item = productList[position]
-        Glide.with(holder.viewImage.context)
-            .load(item.image)
-            .into(holder.viewImage)
-        holder.viewTitle.text = item.title
-        holder.viewPrice.text = "${item.price}"
+
+        if (selectedCategory == "all" || item.category == selectedCategory) {
+            // Load the image using Glide and the ByteArray
+            Glide.with(holder.viewImage.context)
+                .load(item.image)
+                .into(holder.viewImage)
+
+            holder.viewTitle.text = item.title
+            holder.viewPrice.text = "${item.price}"
+        } else {
+            // If the item doesn't match the selected category, hide the itemView
+            holder.itemView.visibility = View.GONE
+        }
 
         val product = productList[position]
         holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            .invoke(item)
+        }
     }
 
     override fun getItemCount(): Int {
