@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CartAdapter(private val cartItems: List<item_cart>) :
+class CartAdapter(private val cartItems: List<CartItem>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,9 +23,9 @@ class CartAdapter(private val cartItems: List<item_cart>) :
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val currentItem = cartItems[position]
-        holder.productNameTextView.text = currentItem.productName
-        holder.quantityTextView.text = "Quantity: ${currentItem.quantity}"
-        holder.totalPriceTextView.text = "Total Price: ${currentItem.totalPrice}"
+        //holder.productNameTextView.text = currentItem.productName
+        //holder.quantityTextView.text = "Quantity: ${currentItem.quantity}"
+        //holder.totalPriceTextView.text = "Total Price: ${currentItem.totalPrice}"
     }
 
     override fun getItemCount(): Int {
