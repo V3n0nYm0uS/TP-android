@@ -2,11 +2,9 @@ package fr.unilasalle.tdandroid
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import kotlinx.coroutines.Dispatchers

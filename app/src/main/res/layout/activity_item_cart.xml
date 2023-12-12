@@ -1,26 +1,26 @@
-<!-- item_cart.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- cart_item_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/cartProductName"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:id="@+id/product_title_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product Name" />
 
     <TextView
-        android:id="@+id/cartQuantity"
+        android:id="@+id/quantity_textnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity" />
+        android:text="Quantity: 0" />
 
     <TextView
-        android:id="@+id/cartPrice"
+        android:id="@+id/total_price_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price" />
+        android:text="Total Price: 0.0" />
+
 </LinearLayout>
