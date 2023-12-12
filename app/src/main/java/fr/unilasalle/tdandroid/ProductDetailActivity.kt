@@ -10,13 +10,20 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class product_details : AppCompatActivity() {
+class ProductDetailActivity : AppCompatActivity() {
 
     private lateinit var productPriceTextView: TextView
     private lateinit var quantityTextNumber: EditText
     private lateinit var totalPriceTextView: TextView
     private lateinit var addToCartButton: Button
 
+
+    fun calculateTotalPrice() {
+        val productPrice = productPriceTextView.text.toString().toDoubleOrNull() ?: 0.0
+        val quantity = quantityTextNumber.text.toString().toDoubleOrNull() ?: 0.0
+        val totalPrice = productPrice * quantity
+        totalPriceTextView.text = totalPrice.toString()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
@@ -28,9 +35,7 @@ class product_details : AppCompatActivity() {
         addToCartButton = findViewById(R.id.add_to_cart_button)
 
         backButton.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this@product_details, Home::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            finish()
         })
 
 
@@ -46,12 +51,5 @@ class product_details : AppCompatActivity() {
             }
         })
 
-
-
-    private fun calculateTotalPrice() {
-        val productPrice = productPriceTextView.text.toString().toDoubleOrNull() ?: 0.0
-        val quantity = quantityTextNumber.text.toString().toDoubleOrNull() ?: 0.0
-        val totalPrice = productPrice * quantity
-        totalPriceTextView.text = totalPrice.toString()
-    }
+}
 }
