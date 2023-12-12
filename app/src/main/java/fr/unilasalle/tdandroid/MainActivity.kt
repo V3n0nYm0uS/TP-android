@@ -1,9 +1,7 @@
 package fr.unilasalle.tdandroid
-
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -105,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 // Extract categories
                 val categories: List<String> = products?.map { it.category }?.distinct() ?: emptyList()
                 // Add "all" to the categories list
-                val categoriesWithAll = mutableListOf("all")
+                val categoriesWithAll = mutableListOf("All")
                 categoriesWithAll.addAll(categories)
                 val categoryAdapter = ArrayAdapter(
                     this@MainActivity,
@@ -130,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
                         val selectedProducts = if (selectedCategory == "All") {
                             // If "All" is selected, show all products
-                            products
+                             products
                         } else {
                             // Otherwise, filter products by the selected category
                             products.filter { it.category == selectedCategory }
