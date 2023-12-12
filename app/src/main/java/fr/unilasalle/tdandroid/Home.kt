@@ -10,7 +10,7 @@ class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView = findViewById<RecyclerView>(R.id.home_items)
         val spanCount = calculateSpanCount()
         val layoutManager = GridLayoutManager(this, spanCount)
         recyclerView.layoutManager = layoutManager

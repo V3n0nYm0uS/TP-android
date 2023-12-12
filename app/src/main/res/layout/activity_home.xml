@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/menu2"
+        android:id="@+id/home_categories"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -39,12 +39,19 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/home_items"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+<<<<<<< HEAD
+=======
+        app:layout_constraintTop_toBottomOf="@+id/home_categories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+>>>>>>> 64e38a5d16f3b1376952dea04890e845d694bf2c
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,5 +76,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/home_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>
