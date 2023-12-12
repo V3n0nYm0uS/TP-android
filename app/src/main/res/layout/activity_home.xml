@@ -37,21 +37,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_title" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_items"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+<<<<<<< HEAD
+=======
         app:layout_constraintTop_toBottomOf="@+id/home_categories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/footer"
+>>>>>>> 64e38a5d16f3b1376952dea04890e845d694bf2c
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu2"
         app:spanCount="@integer/grid_span_count" />
-
-
 
     <TextView
         android:id="@+id/footer"
