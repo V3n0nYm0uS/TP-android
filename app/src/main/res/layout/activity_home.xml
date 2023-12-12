@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/home_items" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/cartButton"
         android:layout_width="76dp"
         android:layout_height="38dp"
         android:layout_marginStart="87dp"
@@ -85,13 +85,9 @@
         android:backgroundTint="#645679"
         android:cropToPadding="true"
         android:scaleType="fitCenter"
-        android:verticalScrollbarPosition="defaultPosition"
         app:layout_constraintBottom_toTopOf="@+id/home_categories"
-        app:layout_constraintDimensionRatio="H,87:51"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/main_title"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/shopping_cart_304843_640" />
 </androidx.constraintlayout.widget.ConstraintLayout>

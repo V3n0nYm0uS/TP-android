@@ -1,4 +1,5 @@
 package fr.unilasalle.tdandroid
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,8 @@ class Panier : AppCompatActivity() {
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
+            val intent = Intent(this, Panier::class.java)
+
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_panier)
             val cartRecyclerView: RecyclerView = findViewById(R.id.cart_recyclerview)

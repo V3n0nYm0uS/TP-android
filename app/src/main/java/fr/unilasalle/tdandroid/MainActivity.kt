@@ -1,19 +1,20 @@
 package fr.unilasalle.tdandroid
+
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import com.bumptech.glide.Glide
 import java.io.ByteArrayOutputStream
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +54,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        val cartButton = findViewById<ImageButton>(R.id.cartButton)
+        cartButton.setOnClickListener {
+            val intent = Intent(this, Panier::class.java)
+            startActivity(intent)
+        }
 
         this.initDb()
 
