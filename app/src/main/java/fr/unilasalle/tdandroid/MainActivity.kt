@@ -1,7 +1,10 @@
 package fr.unilasalle.tdandroid
-
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
@@ -99,22 +102,54 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 // Extract categories
-                products?.let{listProduct ->
-                    val categories: List<String> = listProduct.map{it.category}.distinct()
-                    val adapter = ArrayAdapter(
-                        this@MainActivity,
-                        android.R.layout.simple_spinner_item,
-                        categories
-                    )
-                    categoriesView.adapter = adapter
+                val categories: List<String> = products?.map { it.category }?.distinct() ?: emptyList()
+                // Add "all" to the categories list
+                val categoriesWithAll = mutableListOf("All")
+                categoriesWithAll.addAll(categories)
+                val categoryAdapter = ArrayAdapter(
+                    this@MainActivity,
+                    android.R.layout.simple_spinner_item,
+                    categoriesWithAll
+                )
+                categoriesView.adapter = categoryAdapter
+
+                val itemAdapter: ItemAdapter = ItemAdapter(products, this@MainActivity) { selectedProduct ->
+                    // Handle the click event, e.g., start a new activity with product details
+                    val intent = Intent(this@MainActivity, ProductDetailActivity::class.java)
+                    intent.putExtra("selectedProduct", selectedProduct)
+                    startActivity(intent)
+                }
+                itemView.adapter = itemAdapter
+
+                // Set an OnItemSelectedListener to the Spinner
+                categoriesView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        val selectedCategory = categoriesWithAll[position]
+                        //Log.d("${selectedCategory}")
+
+                        val selectedProducts = if (selectedCategory == "All") {
+                            // If "All" is selected, show all products
+                             products
+                        } else {
+                            // Otherwise, filter products by the selected category
+                            products.filter { it.category == selectedCategory }
+                        }
+
+                        // Update the adapter with the filtered products
+                        itemAdapter.updateData(selectedProducts)
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        // Handle the case when nothing is selected (optional)
+                    }
                 }
 
-                // Add product to their recycler via ItemAdapter
-                val adapter = ItemAdapter(products)
-                itemView.adapter = adapter
             }
             deferred.await()
         }
+
+
+
 
 
     }
