@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -168,7 +169,9 @@ class ProductDetailActivity : AppCompatActivity() {
 
             // Check if the product is already in the cart
             runBlocking {
-                val deferred = async(Dispatchers.IO) {
+                val productInDatabase = db.productDao().getProductById(product.id)
+                if (productInDatabase != null) {
+                    // Product exists in the database, proceed to add to the cart
                     val existingCartItem = db.cartDao().getCartByProductId(product.id)
                     if (existingCartItem != null) {
                         // Product already in the cart, update the quantity
@@ -176,11 +179,22 @@ class ProductDetailActivity : AppCompatActivity() {
                         db.cartDao().insertCart(existingCartItem)
                     } else {
                         // Product not in the cart, create a new entry
-                        val cartEntity = CartEntity(id = product.id, productId = product.id, quantity = quantity)
+                        val cartEntity = CartEntity(id=product.id, productId = product.id, quantity = quantity)
                         db.cartDao().insertCart(cartEntity)
                     }
+                    // Notify the user that the product has been added to the cart
+                    Toast.makeText(application, "Product added to the cart", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Product does not exist in the ProductEntity database, create it
+                    db.productDao().insertProduct(product)
+
+                    // Now, proceed to add the product to the cart
+                    val cartEntity = CartEntity(id=product.id, productId = product.id, quantity = quantity)
+                    db.cartDao().insertCart(cartEntity)
+
+                    // Notify the user that the product has been added to the cart
+                    Toast.makeText(application, "Product added to the cart", Toast.LENGTH_SHORT).show()
                 }
-                deferred.await()
             }
 
 
@@ -190,6 +204,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             // Handle exceptions (e.g., database errors)
+            Log.d("myact", "${e}")
             Toast.makeText(application, "Error adding product to the cart", Toast.LENGTH_SHORT).show()
         }
     }
