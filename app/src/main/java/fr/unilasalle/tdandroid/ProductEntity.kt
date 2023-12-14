@@ -14,7 +14,7 @@ data class ProductEntity(
     val price: Double,
     val description: String?,
     val category: String?,
-    val image: ByteArray?,
+    val image: String?,
    @Embedded
    val rating: RatingEntity?
 ) : Parcelable {
@@ -24,7 +24,7 @@ data class ProductEntity(
         parcel.readDouble(),
         parcel.readString(),
         parcel.readString(),
-        parcel.createByteArray(),
+        parcel.readString(),
         parcel.readParcelable(RatingEntity::class.java.classLoader)
     ) {
     }
@@ -35,7 +35,7 @@ data class ProductEntity(
         parcel.writeDouble(price)
         parcel.writeString(description)
         parcel.writeString(category)
-        parcel.writeByteArray(image)
+        parcel.writeString(image)
         parcel.writeParcelable(rating, flags)
     }
 

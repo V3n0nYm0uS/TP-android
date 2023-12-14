@@ -1,6 +1,5 @@
 package fr.unilasalle.tdandroid
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ForeignKey
@@ -19,5 +18,5 @@ import androidx.room.Index
 data class CartEntity(
     @PrimaryKey val id: Int,
     val productId: Int, // Reference to the ProductEntity
-    val quantity: Int
+    var quantity: Double
 )

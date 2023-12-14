@@ -80,7 +80,7 @@ class ItemAdapter(
                     price = item.price,
                     description = item.description,
                     category = item.category,
-                    image = it,  // Store the image as ByteArray
+                    image = item.image,
                     rating = item.rating
                 )
                 onItemClick.invoke(productEntity)
