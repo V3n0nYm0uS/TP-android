@@ -18,14 +18,17 @@ class CartAdapter(private val items: List<CartItem>) :
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val item = items[position]
-
-        // Set values for each item in the ViewHolder
-        holder.itemNameTextView.text = item.productName
-        holder.itemPriceTextView.text = "Price: ${item.totalPrice}"
-        holder.itemQuantityTextView.text = "Quantity: ${item.quantity}"
 
 
+
+        val currentItem = cartItems[position]
+        /*holder.productNameTextView.text = currentItem.productName
+        holder.quantityTextView.text = "Quantity: ${currentItem.quantity}"
+        holder.totalPriceTextView.text = "Total Price: ${currentItem.totalPrice}"*/
+        //holder.productNameTextView.text = currentItem.productName
+        //holder.quantityTextView.text = "Quantity: ${currentItem.quantity}"
+        //holder.totalPriceTextView.text = "Total Price: ${currentItem.totalPrice}"
+       master
     }
 
     override fun getItemCount(): Int {

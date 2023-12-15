@@ -20,6 +20,14 @@ class Panier : AppCompatActivity() {
             setContentView(R.layout.activity_panier)
             val cartRecyclerView: RecyclerView = findViewById(R.id.cart_recyclerview)
             val cartItems = ShoppingCart.getCartItems()
+
+
+            //val cartAdapter = CartAdapter(cartItems)
+            //cartRecyclerView.adapter = cartAdapter
+            //cartRecyclerView.layoutManager = LinearLayoutManager(this)
+
+
+            //displayCartContents()
             val cartAdapter = CartAdapter(cartItems)
             cartRecyclerView.adapter = cartAdapter
             cartRecyclerView.layoutManager = LinearLayoutManager(this)

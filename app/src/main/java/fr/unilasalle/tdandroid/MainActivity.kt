@@ -1,7 +1,6 @@
 package fr.unilasalle.tdandroid
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -15,7 +14,9 @@ import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import java.io.ByteArrayOutputStream
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,27 +30,6 @@ class MainActivity : AppCompatActivity() {
         ).build()
     }
 
-    suspend fun loadImageAsByteArray(imageUrl: String): ByteArray? {
-        return try {
-            // Load the image using Glide and convert it to ByteArray
-            val bitmap = Glide.with(this@MainActivity)
-                .asBitmap()
-                .load(imageUrl)
-                .submit()
-                .get()
-
-            // Convert Bitmap to ByteArray
-            convertBitmapToByteArray(bitmap)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun convertBitmapToByteArray(bitmap: Bitmap): ByteArray {
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        return stream.toByteArray()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         this.initDb()
 
         val productDao = db.productDao()
+        val cartDao = db.cartDao()
+
 
         val itemView: RecyclerView = findViewById(R.id.home_items)
         val categoriesView: Spinner = findViewById(R.id.home_categories)
@@ -96,17 +78,17 @@ class MainActivity : AppCompatActivity() {
                 val products = RetrofitInstance.productService.getProducts()
                 // Modify the image field of each Product in the list
                 val productEntities = products.map { product ->
-                    loadImageAsByteArray(product.image)?.let {
-                        ProductEntity(
-                            id = product.id,
-                            title = product.title,
-                            price = product.price,
-                            description = product.description,
-                            category = product.category,
-                            image = it,
-                            rating = product.rating
-                        )
-                    }
+
+                    ProductEntity(
+                        id = product.id,
+                        title = product.title,
+                        price = product.price,
+                        description = product.description,
+                        category = product.category,
+                        image = product.image,
+                        rating = product.rating
+                    )
+
                 }
                 // Extract categories
                 val categories: List<String> = products?.map { it.category }?.distinct() ?: emptyList()
@@ -124,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                     // Handle the click event, e.g., start a new activity with product details
                     val intent = Intent(this@MainActivity, ProductDetailActivity::class.java)
                     intent.putExtra("selectedProduct", selectedProduct)
+                    setResult(RESULT_OK, intent)
                     startActivity(intent)
                 }
                 itemView.adapter = itemAdapter
@@ -158,7 +141,27 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
     }
+
+    private fun saveToRoomDatabase(selectedProduct: ProductEntity, quantity: Double) {
+        runBlocking {
+            val deferred = async(Dispatchers.IO) {
+                // Check if the product is already in the cart
+                val existingCartEntity = db.cartDao().getCartByProductId(selectedProduct.id)
+
+                if (existingCartEntity != null) {
+                    // Product already in the cart, update the quantity
+                    existingCartEntity.quantity += quantity
+                    db.cartDao().insertCart(existingCartEntity)
+                } else {
+                    // Product not in the cart, create a new entry
+                    val cartEntity = CartEntity(id = selectedProduct.id, productId = selectedProduct.id, quantity = quantity)
+                    db.cartDao().insertCart(cartEntity)
+                }
+            }
+            deferred.await()
+        }
+    }
+
 
 }
