@@ -1,13 +1,21 @@
 package fr.unilasalle.tdandroid
+import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class Panier : AppCompatActivity() {
 
 
+        @SuppressLint("MissingInflatedId")
         override fun onCreate(savedInstanceState: Bundle?) {
+            val intent = Intent(this, Panier::class.java)
+
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_panier)
             val cartRecyclerView: RecyclerView = findViewById(R.id.cart_recyclerview)
@@ -24,6 +32,12 @@ class Panier : AppCompatActivity() {
             cartRecyclerView.adapter = cartAdapter
             cartRecyclerView.layoutManager = LinearLayoutManager(this)
            // displayCartContents()
+            val backButton: Button = findViewById(R.id.back_button_panier)
+            backButton.setOnClickListener(View.OnClickListener {
+                finish()
+            })
+
+
         }
 
     }
